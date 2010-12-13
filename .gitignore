@@ -1,0 +1,11 @@
+*~
+.*.swp
+.*.swo
+*.out
+
+*.sqlite
+*.db
+*.pyc
+*.log
+
+tags
