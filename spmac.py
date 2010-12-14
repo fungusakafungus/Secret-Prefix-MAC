@@ -49,11 +49,24 @@ _padding_func_zero = lambda partial_block, _block_size:\
 
 _iv = '\0' * _block_size
 
-_hash = merkledamgard(_compression_func_xor, _padding_func_zero, _block_size,
+xor_hash = merkledamgard(_compression_func_xor, _padding_func_zero, _block_size,
         _iv)
 
 def spmac(key, cleartext):
-    return _hash(key + cleartext)
+    r"""Return secret prefix message authentication code for 'cleartext' using key 'key'.
+
+    Secret prefix mac based on Merkle-Damgard construction-based hashing algorithm is insecure:
+    >>> mac = spmac('abc', 'the message')
+    >>> mac
+    '\x04\x11\x10\x15\x0f\x00 m'
+    >>> oscars_message = 'the message\0\0Owned!'
+    >>> oscars_mac = xor_hash(mac + 'Owned!\0\0')
+    >>> oscars_mac
+    'Kf~pk! m'
+    >>> oscars_mac == spmac('abc', oscars_message)
+    True
+    """
+    return xor_hash(key + cleartext)
 
 if __name__ == '__main__':
     main()

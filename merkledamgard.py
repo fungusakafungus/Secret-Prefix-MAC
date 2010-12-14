@@ -88,7 +88,7 @@ def merkledamgard(compression_func, padding_func, block_size, iv):
         result = iv
         for i in xrange(0, len(cleartext) + 1, block_size):
             # include upper bound;
-            # if cleartext is '1234' i goes 0, 2, 4
+            # if cleartext is '1234' and block_size is 2, i goes 0, 2, 4
             block = cleartext[i:i + block_size]
             if not len(block) == block_size:
                 block = padding_func(block, block_size)
