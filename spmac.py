@@ -60,7 +60,7 @@ def spmac(key, cleartext):
     >>> mac
     '\x04\x11\x10\x15\x0f\x00 m'
     >>> oscars_message = 'the message\0\0Owned!'
-    >>> oscars_mac = xor_hash(mac + 'Owned!\0\0')
+    >>> oscars_mac = spmac('', mac + 'Owned!\0\0')
     >>> oscars_mac
     'Kf~pk! m'
     >>> oscars_mac == spmac('abc', oscars_message)

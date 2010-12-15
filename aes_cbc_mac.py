@@ -1,5 +1,5 @@
 def aes_cbc_mac(key, message):
-    """
+    r"""
     Return MAC based on AES in CBC mode using 'key'
 
     Parameters:
@@ -9,8 +9,8 @@ def aes_cbc_mac(key, message):
     Example:
 
     >>> alice_mac = aes_cbc_mac('secret','some text')
-    >>> oscar_message = 'some text'.ljust(64) + 'Oscars text'
-    >>> oscar_mac = hashlib.sha1(alice_mac + 'Oscars text')
+    >>> oscar_message = 'some text'.ljust(16, '\0') + 'Oscars text'
+    >>> oscar_mac = aes_cbc_mac('', alice_mac + 'Oscars text')
     >>> oscar_mac == aes_cbc_mac('secret', oscar_message)
     False
     """
@@ -23,7 +23,7 @@ def aes_cbc_mac(key, message):
 
     res = aes.encrypt(message)
 
-    return res[:32]
+    return res[-32:]
 
 def usage():
     print """

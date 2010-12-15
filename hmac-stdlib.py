@@ -9,7 +9,6 @@ def hmac_sha1(key, message):
     'b617318655057264e28bc0b6fb378c8ef146be00'
 
     """
-    import pdb;pdb.set_trace()
     massage = hmac.new(key, message, hashlib.sha1)
     return massage.digest()
 

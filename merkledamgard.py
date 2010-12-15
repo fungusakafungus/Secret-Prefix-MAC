@@ -79,8 +79,8 @@ def merkledamgard(compression_func, padding_func, block_size, iv):
     ...
     ValueError: iv length not equal to block_size
 
-
     """
+
     if len(iv) != block_size:
         raise ValueError("iv length not equal to block_size")
 
